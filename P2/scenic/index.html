@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Scenic</title>
     <meta charset="utf-8" />
+    <title>Scenic</title>
     <!--    local css and js-->
     <link rel="stylesheet" type="text/css" href="style.css">
     <script type="text/javascript" src="map_scripts.js"></script>
@@ -14,10 +14,12 @@
 
     <!--    search bar files-->
     <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
-
     <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
-
     <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+
+    <!--    routing destination files-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="./filesFromLiedMan/leaflet-routing-machine.css" />
 
     <style>
         body {
@@ -32,60 +34,69 @@
 
 </head>
 <body>
-<div id="map"></div>
-<script>
-    let map = L.map('map').setView([55.7, 12.45], 11);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18
-    }).addTo(map);
+    <div id="map"></div>
+    <script>
+        let map = L.map('map').setView([55.7, 12.45], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18
+        }).addTo(map);
 
-    // Control 3: This add a Search bar
-    let searchControl = new L.esri.Controls.Geosearch().addTo(map);
+        // Control 3: This add a Search bar
+        let searchControl = new L.esri.Controls.Geosearch().addTo(map);
 
-    let results = new L.LayerGroup().addTo(map);
+        let results = new L.LayerGroup().addTo(map);
 
-    searchControl.on('results', function(data){
-        results.clearLayers();
-        for (let i = data.results.length - 1; i >= 0; i--) {
-            results.addLayer(L.marker(data.results[i].latlng));
-        }
-    });
-
-    data = {
-        "type": "FeatureCollection",
-        "features": [
-            {
-                "type": "Feature",
-                "properties": {
-                    "name": "Pub"
-                },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [
-                        -1.1669,
-                        52.956
-                    ]
-                }
-            },
-            {
-                "type": "Feature",
-                "properties": {
-                    "name": "Pub New"
-                },
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [
-                        -1.1428,
-                        52.955
-                    ]
-                }
+        searchControl.on('results', function(data){
+            results.clearLayers();
+            for (let i = data.results.length - 1; i >= 0; i--) {
+                results.addLayer(L.marker(data.results[i].latlng));
             }
-        ]
-    }
-    let markers = L.geoJSON(data).addTo(map);
-</script>
+        });
+    </script>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="./filesFromLiedMan/dist/leaflet-routing-machine.js"></script>
+    <script>
+        L.Routing.control({
+           waypoints: [
+               L.latLng(57.74, 11.94),
+               L.latLng(57.6792, 11.949)
+           ],
+           routeWhileDragging: true
+       }).addTo(map);
 
-
+       data = {
+           "type": "FeatureCollection",
+           "features": [
+               {
+                   "type": "Feature",
+                   "properties": {
+                       "name": "Pub"
+                   },
+                   "geometry": {
+                       "type": "Point",
+                       "coordinates": [
+                           -1.1669,
+                           52.956
+                       ]
+                   }
+               },
+               {
+                   "type": "Feature",
+                   "properties": {
+                       "name": "Pub New"
+                   },
+                   "geometry": {
+                       "type": "Point",
+                       "coordinates": [
+                           -1.1428,
+                           52.955
+                       ]
+                   }
+               }
+           ]
+       }
+       let markers = L.geoJSON(data).addTo(map);
+    </script>
 
 </body>
 </html>

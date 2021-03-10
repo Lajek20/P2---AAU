@@ -10,5 +10,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="leaflet" level="application" />
     <orderEntry type="library" name="jquery-1.11.1" level="application" />
+    <orderEntry type="library" name="wrld" level="application" />
+    <orderEntry type="library" name="jquery-1.12.4" level="application" />
+    <orderEntry type="library" name="searchbar" level="application" />
   </component>
 </module>

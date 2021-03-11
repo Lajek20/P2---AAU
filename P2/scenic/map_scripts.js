@@ -1,4 +1,3 @@
-
 // Add listeners and setup map
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -29,3 +28,58 @@ function getAccess(e){
         }
     });
 }
+// not finished yet
+let dir = MQ.routing.directions();
+
+dir.route({
+    locations: [
+        'Raleigh, NC',
+        'Cary, NC',
+    ]
+});
+
+customRouteLayer = MQ-Routing.RouteLAyer.extend({
+    createStartMarker: (location) => {
+        let custom_icon;
+        let marker;
+
+        custom_icon = L.icon({
+            iconUrl: 'img/red.png',
+            iconSize: [20,20],
+            iconAnchor: [10, 29],
+            popupAnchor: [0,-29],
+
+});
+   marker = L.marker(location.latLng, {icon: custom_icon}).addTo(map);
+   return marker;
+    },
+
+    createEndMarker: (location) => {
+        let custom_icon;
+        let marker;
+
+        custom_icon = L.icon({
+            iconUrl: 'img/blue.png',
+            iconSize: [20,20],
+            iconAnchor: [10, 29],
+            popupAnchor: [0,-29],
+
+        });
+        marker = L.marker(location.latLng, {icon: custom_icon}).addTo(map);
+        return marker;
+    }
+});
+
+map.addLayer(new customRouteLayer({
+    directions: dir,
+    fitBounds: true
+}));
+
+function submitForm(event) {
+    event.preventDefault();
+    console.log('form submitted');
+}
+
+const form = decoument.getElementById('form');
+
+form.addEventListener('submit, submitForm');

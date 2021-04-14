@@ -11,18 +11,25 @@
 let mBg = 111100; //meter per breddegrad
 let mLg = 111211; //meter per længdegrad
 
+let Rx = {
+    kryds:"HansOlriksVej_JohanKellersVej",
+    bg:"?",
+    lg:"?",
+    ruter:"G1, G3"
+}
+
 let G1 = {
     kryds:"Enghavevej_HansOlriksVej",
     bg:"55.657461",
     lg:"12.538591",
-    ruter:""
+    ruter:"G2, Rx"
 }
 
 let G2 = {
     kryds:"Enghavevej_EdvardStormsVej",
     bg:"55.656756",
     lg:"12.538172",
-    ruter:""
+    ruter:"G1, G3, G6"
 }
 
 let G3 = {

@@ -25,12 +25,61 @@ let G2 = {
     ruter:""
 }
 
+let G3 = {
+    kryds:"JohanKellersVej_EdvardStormsVej",
+    bg:"55.656960",
+    lg:"12.537041",
+    ruter:""
+}
+
+let G4 = {
+    kryds:"JohanKellersVej_Tranehavevej",
+    bg:"55.656082",
+    lg:"12.536541",
+    ruter:""
+}
+
+let G5 = {
+    kryds:"ErnestKapersVej_Tranehavevej",
+    bg:"55.655559",
+    lg:"12.537381",
+    ruter:""
+}
+
+let G6 = {
+    kryds:"Enghavevej_Tranehavevej",
+    bg:"55.655559",
+    lg:"12.537854",
+    ruter:""
+}
+
+let G7 = {
+    kryds:"Vesterkirkegaard_HVRolstedsVej",
+    bg:"55.655486",
+    lg:"12.534921",
+    ruter:""
+}
+
+let G8 = {
+    kryds:"Vesterkirkegaard_JohanKellersVej",
+    bg:"55.654365",
+    lg:"12.535568",
+    ruter:""
+}
+
+let G9 = {
+    kryds:"Vesterkirkegaard_NatalieZahlesVej",
+    bg:"55.656412",
+    lg:"12.534380",
+    ruter:""
+}
+
 let node1 = G1;
 let node2 = G2;
 
-function calcDistPyth (node1.kryds , node1.bg, node1.lg, node2.bg, node2.lg) { //udregner distance mellem to noder
+function calcDistPyth(node1.bg, node1.lg, node2.bg, node2.lg) { //udregner distance mellem to noder
     deltaBg = node1.bg - node2.bg;
-    deltaLg = node1.lg - node2.bg;
+    deltaLg = node1.lg - node2.lg;
     if (deltaBg < 0) {          //flipper fortegn, hvis negativ
         deltaBg = deltaBg * -1
     }

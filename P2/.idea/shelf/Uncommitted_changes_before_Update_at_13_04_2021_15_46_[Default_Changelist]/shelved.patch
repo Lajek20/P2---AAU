@@ -1,0 +1,91 @@
+Index: scenic/djikstranew.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/scenic/djikstranew.js b/scenic/djikstranew.js
+new file mode 100644
+--- /dev/null	(date 1618321588571)
++++ b/scenic/djikstranew.js	(date 1618321588571)
+@@ -0,0 +1,53 @@
++// Create graph for the model
++let graph = {
++	start: {A: 1, B: 3},
++	A: {start: 1, end: 5},
++	B: {start: 3, end: 2},
++	end: {A: 5, B: 2}
++};
++
++//V = number of verticies
++//E = number of edges
++
++let V = [graph.numberOfElements];
++
++console.log(V);
++
++/*function dijkstra(graph, start){
++	let S = [];  //set of verticies whose final shortest-path weights from the source s (start) have already been determined.
++	for (let i = 0; i<= graph.length; i++){
++		dist[v] = Infinity;
++		prev[v] = undefined;
++		Q.push(v);
++		dist[source] = 0;
++	}
++	do {
++
++	} while (Q.length); // while Q.length is true
++}*/
++/*
++
++function dijkstra(Graph, source):
++
++  create vertex set Q
++
++  for each vertex v in Graph:
++      dist[v] ← INFINITY
++      prev[v] ← UNDEFINED
++      add v to Q
++	dist[source] ← 0
++
++  while Q is not empty:
++          u ← vertex in Q with min dist[u]
++
++      remove u from Q
++
++        for each neighbor v of u:           // only v that are still in Q
++					alt ← dist[u] + length(u, v)
++          if alt < dist[v]:
++              dist[v] ← alt
++              prev[v] ← u
++
++  return dist[], prev[]
++
++*/
+Index: scenic/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"utf-8\" />\r\n    <title>Scenic</title>\r\n    <!--    local css and js-->\r\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\r\n    <script type=\"text/javascript\" src=\"map_scripts.js\"></script>\r\n\r\n    <!--    map files-->\r\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css\"  />\r\n    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js\"></script>\r\n    <script src=\"https://code.jquery.com/jquery-1.11.1.min.js\"></script>\r\n\r\n    <!--    search bar files-->\r\n    <script src=\"https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js\"></script>\r\n    <script src=\"https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js\"></script>\r\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css\">\r\n\r\n    <!--    routing destination files-->\r\n    <link rel=\"stylesheet\" href=\"https://unpkg.com/leaflet@1.2.0/dist/leaflet.css\" />\r\n    <link rel=\"stylesheet\" href=\"./filesFromLiedMan/leaflet-routing-machine.css\" />\r\n\r\n    <style>\r\n        body {\r\n            padding: 0;\r\n            margin: 0;\r\n        }\r\n        html, body, #map {\r\n            height: 100%;\r\n            width: 100%;\r\n        }\r\n    </style>\r\n\r\n</head>\r\n<body>\r\n    <div id=\"map\"></div>\r\n    <script>\r\n        let map = L.map('map').setView([55.7, 12.45], 11);\r\n        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\r\n            maxZoom: 18\r\n        }).addTo(map);\r\n\r\n        // Control 3: This add a Search bar\r\n        let searchControl = new L.esri.Controls.Geosearch().addTo(map);\r\n\r\n        let results = new L.LayerGroup().addTo(map);\r\n\r\n        searchControl.on('results', function(data){\r\n            results.clearLayers();\r\n            for (let i = data.results.length - 1; i >= 0; i--) {\r\n                results.addLayer(L.marker(data.results[i].latlng));\r\n            }\r\n        });\r\n    </script>\r\n    <script src=\"https://unpkg.com/leaflet@1.2.0/dist/leaflet.js\"></script>\r\n    <script src=\"./filesFromLiedMan/dist/leaflet-routing-machine.js\"></script>\r\n    <script>\r\n        L.Routing.control({\r\n           waypoints: [\r\n               L.latLng(57.74, 11.94),\r\n               L.latLng(57.6792, 11.949)\r\n           ],\r\n           routeWhileDragging: true\r\n       }).addTo(map);\r\n\r\n       data = {\r\n           \"type\": \"FeatureCollection\",\r\n           \"features\": [\r\n               {\r\n                   \"type\": \"Feature\",\r\n                   \"properties\": {\r\n                       \"name\": \"Pub\"\r\n                   },\r\n                   \"geometry\": {\r\n                       \"type\": \"Point\",\r\n                       \"coordinates\": [\r\n                           -1.1669,\r\n                           52.956\r\n                       ]\r\n                   }\r\n               },\r\n               {\r\n                   \"type\": \"Feature\",\r\n                   \"properties\": {\r\n                       \"name\": \"Pub New\"\r\n                   },\r\n                   \"geometry\": {\r\n                       \"type\": \"Point\",\r\n                       \"coordinates\": [\r\n                           -1.1428,\r\n                           52.955\r\n                       ]\r\n                   }\r\n               }\r\n           ]\r\n       }\r\n       let markers = L.geoJSON(data).addTo(map);\r\n    </script>\r\n\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/scenic/index.html b/scenic/index.html
+--- a/scenic/index.html	(revision 46d7caad6b923204ec9bec1b24f29c9fb1b26f65)
++++ b/scenic/index.html	(date 1618141277229)
+@@ -4,7 +4,7 @@
+     <meta charset="utf-8" />
+     <title>Scenic</title>
+     <!--    local css and js-->
+-    <link rel="stylesheet" type="text/css" href="style.css">
++    <link rel="stylesheet" type="text/css" href="style.css"/>
+     <script type="text/javascript" src="map_scripts.js"></script>
+ 
+     <!--    map files-->
+@@ -15,7 +15,7 @@
+     <!--    search bar files-->
+     <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+     <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+-    <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
++    <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css"/>
+ 
+     <!--    routing destination files-->
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
